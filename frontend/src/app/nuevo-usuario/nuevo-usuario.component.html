@@ -1,0 +1,50 @@
+<!-- usuario-form.component.html -->
+<div class="container mt-5">
+    <h2>Formulario de Usuario</h2>
+    <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" formControlName="dni" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" formControlName="apellidos" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="clave">Clave:</label>
+        <input type="password" id="clave" formControlName="clave" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" formControlName="correo" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" formControlName="direccion" class="form-control">
+      </div>
+  
+      <div class="form-group">
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" formControlName="estado" class="form-control">
+      </div>
+  
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" formControlName="nombre" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" formControlName="telefono" class="form-control">
+      </div>
+  
+      <div class="mt-3 mb-3 form-group text-center">
+        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+      </div>
+    </form>
+  </div>
+  
