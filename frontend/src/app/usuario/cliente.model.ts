@@ -1,3 +1,5 @@
+import { Rol } from "../rol/rol.model";
+
 // usuario.model.ts
 export class Usuario {
     id!: number;
@@ -9,6 +11,7 @@ export class Usuario {
     estado!: string;
     nombre!: string;
     telefono!: string;
+    rol!: Rol;
   
     constructor(){}
   }

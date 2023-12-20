@@ -3,6 +3,7 @@ import { Usuario } from '../usuario/cliente.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
+import { Rol } from '../rol/rol.model';
 
 @Component({
   selector: 'app-nuevo-usuario',
@@ -13,7 +14,11 @@ export class NuevoUsuarioComponent {
 
   usuario: Usuario = new Usuario();
 
+  rol: Rol = new Rol();
+
   usuarioForm: FormGroup;
+
+  roles: Rol[] = [];
 
   constructor(
     private serviceService: ServiceService, 
@@ -29,20 +34,47 @@ export class NuevoUsuarioComponent {
       estado: [''],
       nombre: ['', Validators.required],
       telefono: [''],
+      idRol: ['', Validators.required]
   })
 }
 
-  onSubmit() {
-    this.usuario = { ...this.usuario, ...this.usuarioForm.value };
+ngOnInit() {
+  this.serviceService.getAllRol().subscribe(
+    roles => {
+      this.roles = roles;
+    },
+    error => {
+      console.error('Error al obtener roles:', error);
+    }
+  );
+}
 
-    this.serviceService.crearUsuario(this.usuario).subscribe(
-          response => {
-              console.log('Usuario creado con éxito:', response);
-              this.router.navigate(['/login']);
-          },
-          error => {
-              console.error('Error al crear usuario:', error);
-          }
-      );
-  }
+onSubmit() {
+  const idRolSeleccionado = this.usuarioForm.value.idRol;
+  this.usuarioForm.value.idRol = parseInt(this.usuarioForm.value.idRol);
+  this.rol = this.roles.find(rol => rol.idRol === parseInt(idRolSeleccionado)) ?? new Rol();
+  delete this.usuarioForm.value.idRol;
+
+  this.usuario = { ...this.usuario, ...this.usuarioForm.value };
+
+  if (this.rol) {
+    this.usuario.rol = this.usuario.rol || {};
+    
+    this.usuario.rol = this.rol;
+    }
+
+  console.log(this.rol);
+  console.log(this.roles);
+  console.log(this.usuario);
+
+  this.serviceService.crearUsuario(this.usuario).subscribe(
+    response => {
+      console.log('Usuario creado con éxito:', response);
+      this.router.navigate(['/login']);
+    },
+    error => {
+      console.error('Error al crear usuario:', error);
+    }
+  );
+}
 }

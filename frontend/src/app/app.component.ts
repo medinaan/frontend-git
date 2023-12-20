@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Usuario } from './usuario/cliente.model';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+
+  constructor(private authService: AuthService) {}
+
+  get usuarioLogueado(): boolean {
+    return this.authService.getUsuarioLogueado();
+  }
 }

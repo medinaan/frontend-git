@@ -1,20 +1,37 @@
+<!-- tu-componente.component.html -->
 <div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" routerLink="/">Inicio</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-        aria-expanded="false" aria-label="Toggle navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" routerLink="/">Inicio</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
-          </li>
+        <ul class="navbar-nav ml-auto"> <!-- Aplicar la clase ml-auto aquí -->
+          <!-- Lógica condicional para mostrar el botón de inicio de sesión o el icono del usuario -->
+          <ng-container *ngIf="!usuarioLogueado; else usuarioLogueadoTemplate">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
+            </li>
+          </ng-container>
+          <ng-template #usuarioLogueadoTemplate>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/carrito">
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/usuario">
+                <i class="fa fa-user"></i>
+              </a>
+            </li>
+          </ng-template>
         </ul>
       </div>
     </div>
   </nav>
-  
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet></router-outlet>
+</div>
