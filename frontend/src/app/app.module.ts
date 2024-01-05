@@ -8,13 +8,15 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { NuevoUsuarioComponent } from './nuevo-usuario/nuevo-usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidaComponent,
     InicioSesionComponent,
-    NuevoUsuarioComponent
+    NuevoUsuarioComponent,
+    HistorialComprasComponent
   ],
   imports: [
     BrowserModule,
