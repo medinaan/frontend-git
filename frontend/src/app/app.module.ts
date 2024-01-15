@@ -9,6 +9,7 @@ import { NuevoUsuarioComponent } from './nuevo-usuario/nuevo-usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuUsuarioComponent } from './menu-usuario/menu-usuario.component';
+import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
 import { ListadoProductosComponent } from './listado-productos/listado-productos.component';
 
 @NgModule({
@@ -17,8 +18,9 @@ import { ListadoProductosComponent } from './listado-productos/listado-productos
     BienvenidaComponent,
     InicioSesionComponent,
     NuevoUsuarioComponent,
-    MenuUsuarioComponent,
-    ListadoProductosComponent
+    MenuUsuarioComponent,    
+    ListadoProductosComponent,
+    HistorialComprasComponent
   ],
   imports: [
     BrowserModule,
