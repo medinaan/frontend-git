@@ -1,0 +1,49 @@
+<!-- listado-productos.component.html -->
+<div class="container mt-4">
+    <h2>Listado de Productos</h2>
+  
+    <div class="row">
+      <div class="col" (click)="ordenarPor('categoria')">Categoría</div>
+      <div class="col" *ngIf="mostrarCampo('categoria')">
+        <div *ngFor="let producto of productos">
+          <div>Categoría: {{ producto.categoria }}</div>
+        </div>
+      </div>
+  
+      <div class="col" (click)="ordenarPor('tipo')">Tipo</div>
+      <div class="col" *ngIf="mostrarCampo('tipo')">
+        <div *ngFor="let producto of productos">
+          <div>Tipo: {{ producto.tipo }}</div>
+        </div>
+      </div>
+  
+      <div class="col" (click)="ordenarPor('marca')">Marca</div>
+      <div class="col" *ngIf="mostrarCampo('marca')">
+        <div *ngFor="let producto of productos">
+          <div>Marca: {{ producto.marca }}</div>
+        </div>
+      </div>
+  
+      <div class="col" (click)="ordenarPor('nombre')">Nombre</div>
+      <div class="col" *ngIf="mostrarCampo('nombre')">
+        <div *ngFor="let producto of productos">
+          <div>Nombre: {{ producto.nombre }}</div>
+        </div>
+      </div>
+  
+      <div class="col" (click)="ordenarPor('descripcion')">Descripción</div>
+      <div class="col" *ngIf="mostrarCampo('descripcion')">
+        <div *ngFor="let producto of productos">
+          <div>Descripción: {{ producto.descripcion }}</div>
+        </div>
+      </div>
+  
+      <div class="col" (click)="ordenarPor('precio')">Precio Unidad</div>
+      <div class="col" *ngIf="mostrarCampo('precio')">
+        <div *ngFor="let producto of productos">
+          <div>Precio Unidad: {{ producto.precio }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
