@@ -1,0 +1,33 @@
+<!-- historial-compra.component.html -->
+
+<div class="container mt-4">
+    <h2>Historial de Compras</h2>
+    
+    <div *ngIf="historialCompras && historialCompras.length > 0; else noHistorial">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Fecha de Compra</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let compra of historialCompras">
+            <!--<td>{{ compra.fechaCompra | date:'short' }}</td> -->
+            <td>
+              <ul>
+                <li *ngFor="let detalle of compra.detalles">
+                  {{ detalle.cantidad }} x {{ detalle.productoId }} - ${{ detalle.precio }}
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <ng-template #noHistorial>
+      <p>No hay historial de compras disponible.</p>
+    </ng-template>
+  </div>
+  

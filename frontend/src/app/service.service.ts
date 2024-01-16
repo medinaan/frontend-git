@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from './usuario/cliente.model';
 import { Rol } from './rol/rol.model';
+import { HistorialCompra } from './historialCompra/historialCompra';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,9 @@ export class ServiceService {
 
     iniciarSesion(cliente: Usuario): Observable<Usuario> {
         return this.http.post<Usuario>(this.apiUrl +'/login', cliente);
+    }
+
+    getHistorialCompras(clienteId: Number | undefined): Observable<HistorialCompra[]> {
+      return this.http.get<HistorialCompra[]>(this.apiUrl +'/historialcompra/'+ clienteId);
     }
 }
