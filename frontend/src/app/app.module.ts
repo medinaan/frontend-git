@@ -8,7 +8,13 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { NuevoUsuarioComponent } from './nuevo-usuario/nuevo-usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import { HistorialCompraComponent } from './historial-compra/historial-compra.component';
+=======
+import { MenuUsuarioComponent } from './menu-usuario/menu-usuario.component';
+import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
+import { ListadoProductosComponent } from './listado-productos/listado-productos.component';
+>>>>>>> develop
 
 @NgModule({
   declarations: [
@@ -16,7 +22,13 @@ import { HistorialCompraComponent } from './historial-compra/historial-compra.co
     BienvenidaComponent,
     InicioSesionComponent,
     NuevoUsuarioComponent,
+<<<<<<< HEAD
     HistorialCompraComponent
+=======
+    MenuUsuarioComponent,    
+    ListadoProductosComponent,
+    HistorialComprasComponent
+>>>>>>> develop
   ],
   imports: [
     BrowserModule,
