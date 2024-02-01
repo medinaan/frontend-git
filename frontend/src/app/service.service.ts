@@ -24,7 +24,11 @@ export class ServiceService {
 
     getAllRol(): Observable<Rol[]> {
       return this.http.get<Rol[]>(this.apiUrl +'/rol');
-  }
+    }
+
+    getAllClientes(): Observable<Usuario []> {
+      return this.http.get<Usuario[]>(this.apiUrl +'/cliente');
+    }
 
     iniciarSesion(cliente: Usuario): Observable<Usuario> {
         return this.http.post<Usuario>(this.apiUrl +'/login', cliente);

@@ -20,6 +20,10 @@ export class NuevoUsuarioComponent {
 
   roles: Rol[] = [];
 
+  clientes: Usuario[] = [];
+
+  mensajeError: string = '';
+
   constructor(
     private serviceService: ServiceService, 
     private fb: FormBuilder,
@@ -47,34 +51,72 @@ ngOnInit() {
       console.error('Error al obtener roles:', error);
     }
   );
+  this.serviceService.getAllClientes().subscribe(
+    clientes => {
+      this.clientes = clientes;
+    },
+    error => {
+      console.error('Error al obtener clientes:', error);
+    }
+  );
 }
 
 onSubmit() {
-  const idRolSeleccionado = this.usuarioForm.value.idRol;
-  this.usuarioForm.value.idRol = parseInt(this.usuarioForm.value.idRol);
-  this.rol = this.roles.find(rol => rol.idRol === parseInt(idRolSeleccionado)) ?? new Rol();
-  delete this.usuarioForm.value.idRol;
+  if (this.usuarioForm.valid) {
+    const idRolSeleccionado = this.usuarioForm.value.idRol;
+    this.usuarioForm.value.idRol = parseInt(this.usuarioForm.value.idRol);
+    this.rol = this.roles.find(rol => rol.idRol === parseInt(idRolSeleccionado)) ?? new Rol();
+    delete this.usuarioForm.value.idRol;
 
-  this.usuario = { ...this.usuario, ...this.usuarioForm.value };
+    this.usuario = { ...this.usuario, ...this.usuarioForm.value };
 
-  if (this.rol) {
-    this.usuario.rol = this.usuario.rol || {};
-    
-    this.usuario.rol = this.rol;
-    }
+    if (this.rol) {
+      this.usuario.rol = this.usuario.rol || {};
+      
+      this.usuario.rol = this.rol;
+      }
 
-  console.log(this.rol);
-  console.log(this.roles);
-  console.log(this.usuario);
+    this.mensajeError = '';
 
-  this.serviceService.crearUsuario(this.usuario).subscribe(
-    response => {
-      console.log('Usuario creado con éxito:', response);
-      this.router.navigate(['/login']);
-    },
-    error => {
-      console.error('Error al crear usuario:', error);
-    }
+      for (let cliente of this.clientes) {
+        if(cliente.dni === this.usuarioForm.value.dni || cliente.correo === this.usuarioForm.value.correo){
+          this.mensajeError = 'El DNI o el correo ya están registrados. Por favor, cambie uno de ellos.';
+          break;
+        }
+      }
+
+      if (this.mensajeError !== '') {
+        console.error(this.mensajeError);
+        return;
+      }
+
+    console.log(this.rol);
+    console.log(this.roles);
+    console.log(this.usuario);
+
+    this.serviceService.crearUsuario(this.usuario).subscribe(
+      response => {
+        console.log('Usuario creado con éxito:', response);
+        this.router.navigate(['/login']);
+      },
+      error => {
+        console.error('Error al crear usuario:', error);
+      }
   );
+  } else {
+    console.log('Required no');
+    this.markFormGroupTouched(this.usuarioForm);
+  }
+  
+}
+
+private markFormGroupTouched(formGroup: FormGroup) {
+  Object.values(formGroup.controls).forEach(control => {
+    if (control instanceof FormGroup) {
+      this.markFormGroupTouched(control);
+    } else {
+      control.markAsTouched();
+    }
+  });
 }
 }
